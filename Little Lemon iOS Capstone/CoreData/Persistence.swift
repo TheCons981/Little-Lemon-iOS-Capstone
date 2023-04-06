@@ -53,4 +53,12 @@ struct PersistenceController {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
+    
+    
+    func clearData(entityName: String) {
+        // Delete all dishes from the store
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let _ = try? container.persistentStoreCoordinator.execute(deleteRequest, with: container.viewContext)
+    }
 }
